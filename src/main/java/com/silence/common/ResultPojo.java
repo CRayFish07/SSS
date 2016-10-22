@@ -13,10 +13,14 @@ public class ResultPojo<T> {
 
 	public ResultPojo() {
 		this.data = null;
-
 		this.errorCode = SystemCode.SUCCESS; // 默认为请求成功！
-
 		this.errorInfo = "操作成功！";
+	}
+
+	public ResultPojo(T data) {
+		this.data = data;
+		this.errorCode = SystemCode.SUCCESS; // 默认为请求成功！
+		this.errorInfo = "操作成功！";		
 	}
 
 	public T getData() {
