@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
+import com.silence.common.ResultPojo;
 import com.silence.enties.User;
 import com.silence.services.UserService;
 
@@ -27,21 +28,22 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	private static Gson gson = new Gson();
 
 	/*
 	 * 获取不同年龄的人数
 	 */
+	@ResponseBody
 	@RequestMapping(value="/getCountByAge",method=RequestMethod.GET)
-	public void getCountByAge(HttpServletResponse response) throws IOException{
+	public ResultPojo<List<Object[]>> getCountByAge(HttpServletResponse response) throws IOException{
+		ResultPojo<List<Object[]>> resultPojo = new ResultPojo<>();
 		List<Object[]> data = userService.findByAgeCount();
-		System.out.println(gson.toJson(data));
-		response.getWriter().print(gson.toJson(data));
+		resultPojo.setData(data);
+		return resultPojo;
 	}
 
 	
 	/*
-	 * 更新病人
+	 * 更新用户
 	 */
 	@RequestMapping(value="/updateUser",method=RequestMethod.POST)
 	public void updateUser(@RequestParam("id") Integer id,@RequestParam("name") String name,
@@ -54,9 +56,9 @@ public class UserController {
 	/*
 	 * 分页查询
 	 */
+	@ResponseBody
 	@RequestMapping(value="/findUsersByPage",method=RequestMethod.GET)
-	public String findUsersByPage(@RequestParam("page") Integer page,
-			Map<String,Object> map){
+	public ResultPojo<List<User>> findUsersByPage(@RequestParam("page") Integer page){
 		//总共有多少记录
 		Long count = userService.count();
 		count = (count % 7 == 0 ? count / 7 : count / 7 + 1);
@@ -64,48 +66,42 @@ public class UserController {
 			page = count.intValue();
 		}
 		List<User> users = userService.findPage(page, 7);
-		map.put("users", users);
-		map.put("count", count);
-		map.put("page", page);
-		return "showusers";
+		ResultPojo<List<User>> resultPojo = new ResultPojo<>();
+		resultPojo.setData(users);
+		return resultPojo;
 	}
 	/*
 	 * 删除用户
 	 */
+	@ResponseBody
 	@RequestMapping(value="/deleteUser",method=RequestMethod.POST)
-	public void deleteUser(@RequestParam("id") Integer id,PrintWriter writer){
+	public ResultPojo<String> deleteUser(@RequestParam("id") Integer id){
 		userService.delete(id);
-		writer.print(1);
+		return new ResultPojo<String>("删除成功");
 	}
 	
 	/*
 	 * 保存用户
 	 */
+	@ResponseBody
 	@RequestMapping(value="/saveUser",method=RequestMethod.POST)
-	public String saveUser(@ModelAttribute @Valid User user,BindingResult result){
+	public ResultPojo<String> saveUser(@ModelAttribute @Valid User user,BindingResult result){
 		userService.add(user);
-		return "redirect:findUsersByPage?page=1";
+		return new ResultPojo<String>("保存成功");
 	}
-	/*
-	 * 查找所有的用户
-	 */
-	@RequestMapping(value = "/findUsers", method = RequestMethod.GET)
-	public String findUser(Map<String,Object> map) {
-		List<User> users = userService.find();
-		map.put("users", users);
-		return "users";
-	}
-	
 	/*
 	 * 检查电话号码是否存在
 	 */
+	@ResponseBody
 	@RequestMapping(value="/checkExistTelephone",method=RequestMethod.POST)
-	public void checkTelephone(@RequestParam("telephone") String telephone,
-			PrintWriter writer){
+	public ResultPojo<String> checkTelephone(@RequestParam("telephone") String telephone){
 		User user = new User(telephone);
+		ResultPojo<String> resultPojo = new ResultPojo<>();
 		if (userService.exist(user) == null){
-			writer.print(1);
-			return;
+			resultPojo.setData("存在");
+		}else{
+			resultPojo.setData("不存在");			
 		}
+		return resultPojo;
 	}
 }
