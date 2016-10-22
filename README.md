@@ -1,5 +1,5 @@
 #Spring+SpringMVC+Spring Data JPA搭建快速开发环境
-
+###Spring Data JPA
 pring Data JPA提供了一整套数据访问层(DAO)的解决方案，致力于减少数据访问层的开发量，并支持云服务的开源框架。
 
 Spring Data 作为SpringSource的其中一个父项目， 旨在统一和简化对各类型持久化存储， 而不拘泥于是关系型数据库还是NoSQL 数据存储。无论是哪种持久化存储， 数据访问对象（或称作为DAO，即Data Access Objects）通常都会提供对单一域对象的CRUD （创建、读取、更新、删除）操作、查询方法、排序和分页方法等。
@@ -16,6 +16,12 @@ Spring Data Jpa中Repository是一个空接口，CrudRepository： 继承Reposit
 
 ![](https://github.com/silence940109/SSS/blob/master/image/JPA1.png)
 
+###Spring MVC
+
+Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架，即使用了MVC架构模式的思想，将web层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，框架的目的就是帮助我们简化开发，Spring Web MVC也是要简化我们日常Web开发的。
+
+关于Spring MVC过多的细节这里不展开讨论，相信做WEB开发的基本上都懂这一块。
+
 ###软件
 * JDK7+
 * Maven3+
@@ -24,6 +30,8 @@ Spring Data Jpa中Repository是一个空接口，CrudRepository： 继承Reposit
 
 ###准备
 在src/main/resources/db.properties配置文件中修改数据库的配置信息，包括url、user和password等。
+
+该项目使用STS(eclipse)开发，可以直接导入到eclipse工程中运行
 
 ###测试
 
@@ -39,3 +47,4 @@ POST请求
 ![](https://github.com/silence940109/SSS/blob/master/image/pagesort1.png)
 
 ![](https://github.com/silence940109/SSS/blob/master/image/pagesort2.png)
+
