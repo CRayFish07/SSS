@@ -16,13 +16,26 @@ Spring Data Jpa中Repository是一个空接口，CrudRepository： 继承Reposit
 
 ![](https://github.com/silence940109/SSS/blob/master/image/JPA1.png)
 
-####软件
+###软件
 * JDK7+
 * Maven3+
 * Tomcat7+
 * MySQL
 
-####准备
+###准备
 在src/main/resources/db.properties配置文件中修改数据库的配置信息，包括url、user和password等。
 
+###测试
 
+使用[PostMan](https://github.com/silence940109/Java/tree/master/chrome_postman)对该URL进行请求测试：
+
+GET请求
+![](https://github.com/silence940109/SSS/blob/master/image/getCountByAge.png)
+
+POST请求
+![](https://github.com/silence940109/SSS/blob/master/image/delete.png)
+
+分页请求
+![](https://github.com/silence940109/SSS/blob/master/image/pagesort1.png)
+
+![](https://github.com/silence940109/SSS/blob/master/image/pagesort2.png)
