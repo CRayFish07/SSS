@@ -16,6 +16,17 @@ Spring Data Jpa中Repository是一个空接口，CrudRepository： 继承Reposit
 
 ![](https://github.com/silence940109/SSS/blob/master/image/JPA1.png)
 
+其中它们提供的方法主要有：
+
+![](https://github.com/silence940109/SSS/blob/master/image/repository.png)
+
+![](https://github.com/silence940109/SSS/blob/master/image/CrudRepository.png)
+
+![](https://github.com/silence940109/SSS/blob/master/image/PagingAndSortingRepository.png)
+
+![](https://github.com/silence940109/SSS/blob/master/image/JpaRepository.png)
+
+
 ###Spring MVC
 
 Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架，即使用了MVC架构模式的思想，将web层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，框架的目的就是帮助我们简化开发，Spring Web MVC也是要简化我们日常Web开发的。
@@ -32,6 +43,7 @@ Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动�
 在src/main/resources/db.properties配置文件中修改数据库的配置信息，包括url、user和password等。
 
 该项目使用STS(eclipse)开发，可以直接导入到eclipse工程中运行
+
 
 ###测试
 
