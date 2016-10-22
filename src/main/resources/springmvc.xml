@@ -37,6 +37,7 @@
 		<property name="maxUploadSize" value="10485760000"></property>
 		<property name="maxInMemorySize" value="40960"></property>
 	</bean>
+	<!-- 拦截器配置，可以用来作为权限的校验 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<!-- 默认拦截所有的请求 -->
