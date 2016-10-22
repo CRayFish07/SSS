@@ -41,7 +41,8 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
 		</property>
-		<property name="packagesToScan" value="com.silence.prescription.entities"></property>
+		<!-- 配置扫描com.silence.entities包下的实体类，会根据实体类生成数据库表结构 -->
+		<property name="packagesToScan" value="com.silence.entities"></property>
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
