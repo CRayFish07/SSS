@@ -56,6 +56,36 @@ POST请求
 ![](https://github.com/silence940109/SSS/blob/master/image/delete.png)
 
 分页请求
+
+分页请求代码
+
+	public List<T> findPage(int page, int pageSize) {
+		if (page < 1){
+			page = 1;
+		}
+		if (pageSize < 1){
+			pageSize = 16;
+		}
+		Pageable pageable = new PageRequest(page - 1, pageSize);
+		return dao.findAll(pageable).getContent();
+	}
+
+Pageable是一个分页接口，它的主要实现类为PageRequest,有三个构造方法
+
+	//创建一个分页请求
+	public PageRequest(int page, int size) {
+		this(page, size, null);
+	}
+    //创建一个可排序的分页请求
+	public PageRequest(int page, int size, Direction direction, String... properties) {
+		this(page, size, new Sort(direction, properties));
+	}
+	//创建一个可排序的分页请求
+	public PageRequest(int page, int size, Sort sort) {
+		super(page, size);
+		this.sort = sort;
+	}
+
 ![](https://github.com/silence940109/SSS/blob/master/image/pagesort1.png)
 
 ![](https://github.com/silence940109/SSS/blob/master/image/pagesort2.png)
